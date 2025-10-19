@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTC Collab - Real-Time Communication</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="auth-container" class="auth-container">
+        <div class="auth-card">
+            <h1>RTC Collab</h1>
+            <p>Real-Time Communication & Collaboration</p>
+            <div id="login-form" class="auth-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button id="login-btn">Login</button>
+                <p class="auth-switch">Don't have an account? <span id="show-register">Register</span></p>
+            </div>
+            <div id="register-form" class="auth-form hidden">
+                <input type="text" id="reg-username" placeholder="Username" required>
+                <input type="password" id="reg-password" placeholder="Password" required>
+                <input type="password" id="reg-confirm" placeholder="Confirm Password" required>
+                <button id="register-btn">Register</button>
+                <p class="auth-switch">Already have an account? <span id="show-login">Login</span></p>
+            </div>
+            <div id="auth-error" class="error-message"></div>
+        </div>
+    </div>
+
+    <div id="app-container" class="app-container hidden">
+        <header class="app-header">
+            <div class="header-left">
+                <h2>RTC Collab</h2>
+                <span id="room-id" class="room-id"></span>
+            </div>
+            <div class="header-right">
+                <span id="user-name" class="user-name"></span>
+                <button id="logout-btn" class="btn-secondary">Logout</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="video-section">
+                <div class="video-grid" id="video-grid">
+                    <div class="video-container">
+                        <video id="local-video" autoplay muted playsinline></video>
+                        <div class="video-label">You</div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="toggle-video" class="control-btn active" title="Toggle Video">
+                        <span class="icon">📹</span>
+                    </button>
+                    <button id="toggle-audio" class="control-btn active" title="Toggle Audio">
+                        <span class="icon">🎤</span>
+                    </button>
+                    <button id="share-screen" class="control-btn" title="Share Screen">
+                        <span class="icon">🖥️</span>
+                    </button>
+                    <button id="end-call" class="control-btn danger" title="End Call">
+                        <span class="icon">📞</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="tabs">
+                    <button class="tab active" data-tab="chat">💬 Chat</button>
+                    <button class="tab" data-tab="whiteboard">🎨 Whiteboard</button>
+                    <button class="tab" data-tab="files">📁 Files</button>
+                    <button class="tab" data-tab="participants">👥 Participants</button>
+                </div>
+
+                <div class="tab-content">
+                    <div id="chat-tab" class="tab-panel active">
+                        <div id="chat-messages" class="chat-messages"></div>
+                        <div class="chat-input-container">
+                            <input type="text" id="chat-input" placeholder="Type a message...">
+                            <button id="send-message">Send</button>
+                        </div>
+                    </div>
+
+                    <div id="whiteboard-tab" class="tab-panel hidden">
+                        <div class="whiteboard-tools">
+                            <button class="tool-btn active" data-tool="pen">✏️ Pen</button>
+                            <button class="tool-btn" data-tool="eraser">🧹 Eraser</button>
+                            <input type="color" id="color-picker" value="#000000">
+                            <button class="tool-btn" id="clear-canvas">🗑️ Clear</button>
+                        </div>
+                        <canvas id="whiteboard" width="800" height="600"></canvas>
+                    </div>
+
+                    <div id="files-tab" class="tab-panel hidden">
+                        <div class="file-upload-area">
+                            <input type="file" id="file-input" hidden>
+                            <button id="select-file" class="btn-primary">Select File to Share</button>
+                        </div>
+                        <div id="files-list" class="files-list"></div>
+                    </div>
+
+                    <div id="participants-tab" class="tab-panel hidden">
+                        <div id="participants-list" class="participants-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="join-call-modal" class="modal">
+            <div class="modal-content">
+                <h3>Join a Call</h3>
+                <input type="text" id="room-input" placeholder="Enter Room ID">
+                <div class="modal-actions">
+                    <button id="create-room-btn" class="btn-primary">Create New Room</button>
+                    <button id="join-room-btn" class="btn-primary">Join Room</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+</body>
+</html>
